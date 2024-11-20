@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicação Romântica</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6f2;
+            font-family: 'Arial', sans-serif;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            width: 400px;
+        }
+        .question {
+            font-size: 1.2em;
+            color: #ff66b2;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        #yesBtn {
+            background-color: #ff66b2;
+            color: #fff;
+            position: relative;
+        }
+        #yesBtn::after {
+            content: "\2665";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            color: red;
+            font-size: 1.5em;
+        }
+        #yesBtn:hover {
+            background-color: #e655a3;
+        }
+        #noBtn {
+            background-color: #ccc;
+            color: #333;
+        }
+        #noBtn:hover {
+            background-color: #b3b3b3;
+        }
+        .error-message {
+            font-size: 1em;
+            color: red;
+            margin-top: 20px;
+            display: none;
+        }
+        .video-embed {
+            margin-top: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question">Quer fazer o almoço pra gente amanhã e em troca receber muito amor e carinho?</div>
+        <div class="buttons">
+            <button id="yesBtn">Sim</button>
+            <button id="noBtn">Não</button>
+        </div>
+        <div id="errorMessage" class="error-message"></div>
+        <div id="videoEmbed" class="video-embed"></div>
+    </div>
+
+    <audio id="errorSound" src="https://www.myinstants.com/media/sounds/wrong-answer-sound-effect.mp3"></audio>
+
+    <script>
+        let noClickCount = 0;
+
+        document.getElementById("yesBtn").addEventListener("click", function() {
+            window.location.href = "https://www.youtube.com/watch?v=GC5Ecs5iIrc";
+        });
+
+        document.getElementById("noBtn").addEventListener("click", function() {
+            const errorMessage = document.getElementById("errorMessage");
+            const errorSound = document.getElementById("errorSound");
+            const videoEmbed = document.getElementById("videoEmbed");
+
+            noClickCount++;
+
+            if (noClickCount === 1) {
+                errorMessage.textContent = "Débora, meu amor, você é melhor que isso. Tente de novo.";
+                videoEmbed.innerHTML = `<iframe src="https://www.youtube.com/embed/hfyTgp92rKY?si=fBnY1fapOa-acn8T" frameborder="0" allowfullscreen></iframe>`;
+            } else if (noClickCount === 2) {
+                errorMessage.textContent = "Eu imaginei que você tentaria persistir no erro, por isso você tem uma última chance. Por favor, faça a escolha que você sabe que é a certa, meu amor.";
+                videoEmbed.innerHTML = `<iframe src="https://www.youtube.com/embed/tzNJqeYIboY?si=8sof3lr-7USqI_De" frameborder="0" allowfullscreen></iframe>`;
+            } else if (noClickCount >= 3) {
+                window.location.href = "https://youtube.com/shorts/4gPuDhOkp6U?si=f3PzLyovB15Oh3-_";
+            }
+
+            errorMessage.style.display = "block";
+            errorSound.play();
+        });
+    </script>
+</body>
+</html>
